@@ -1,0 +1,29 @@
+<%= turbo_frame_tag "incidents", class: "min-w-full rounded border-b border-white-200" do %>
+  <table class="min-w-full bg-black border text-white-700">
+    <thead class="bg-violet-900 text-black">
+      <tr>
+        <th scope="col" class="text-left py-3 px-6 uppercase font-semibold text-sm cursor-pointer">
+          <%= build_sort_link(column: "title", label: "Title") %>
+        </th>
+        <th scope="col" class="text-left py-3 px-6 uppercase font-semibold text-sm cursor-pointer">
+          <%= build_sort_link(column: "description", label: "Description") %>
+        </th>
+        <th scope="col" class="text-left py-3 px-6 uppercase font-semibold text-sm cursor-pointer">
+          <%= build_sort_link(column: "severity", label: "Severity") %>
+        </th>
+        <th scope="col" class="text-left py-3 px-6 uppercase font-semibold text-sm cursor-pointer">
+          <%= build_sort_link(column: "status", label: "Status") %>
+        </th>
+        <th scope="col" class="text-left py-3 px-6 uppercase font-semibold text-sm cursor-pointer">
+          <%= build_sort_link(column: "users.name", label: "Reporter") %>
+        </th>
+      </tr>
+    </thead> 
+
+    <%= turbo_stream_from(:incidents) %>
+    <%= content_tag :tbody, id: "all_incidents", class: "text-white-700" do %>
+      <%= render incidents %>
+    <% end %>
+  </table>
+<% end %>
+
